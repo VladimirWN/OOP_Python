@@ -6,11 +6,13 @@ from Event_basket.util.writer_reader import *
 
 def new_ingredient(name: str, category: int, type_packing: int, price: float):
     for i in Category:
-        if category == i.value:
-            category = i
+        if int(category) == i.value:
+            category = i.name
+            break
     for i in TypeOfPackaging:
-        if type_packing == i.value:
-            type_packing = i
+        if int(type_packing) == i.value:
+            type_packing = i.name
+            break
     return Ingredient(name, category, type_packing, price)
 
 

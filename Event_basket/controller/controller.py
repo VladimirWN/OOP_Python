@@ -20,9 +20,9 @@ def start():
             for i in db_dishes:
                 sent_msg(i)
         elif point == 3:
-            new_i = new_ingredient()
+            new_i = add_ingredient()
             if new_i not in db_ingredients:
-                db_ingredients.append(new_ingredient())
+                db_ingredients.append(new_i)
                 update_ingredient_list(db_ingredients)
             else:
                 sent_msg("такой ингредент уже есть, отмена.")
@@ -40,14 +40,13 @@ def start():
         print('Завершение работы программы.')
 
 
-def new_ingredient():
+def add_ingredient():
     name = get_data("Введите название (только буквы): ")
     while not is_correct_str(name):
         sent_msg("Некорректный ввод, повторите: ")
         name = get_data()
 
     sent_msg("Введите номер категории: ")
-    category_res = ""
     while True:
         for i in Category:
             sent_msg(f"{i.value} - {i.name}")
@@ -58,13 +57,9 @@ def new_ingredient():
         if int(category) not in range(0, 9):
             sent_msg("Некорректный ввод, повторите: ")
         else:
-            for i in Category:
-                if int(category) == i.value:
-                    category_res = i.name
             break
 
     sent_msg("Введите номер типа упаковки: ")
-    type_packing_res = ""
     while True:
         for i in TypeOfPackaging:
             sent_msg(f"{i.value} - {i.name}")
@@ -75,13 +70,10 @@ def new_ingredient():
         if int(type_packing) not in range(0, 3):
             sent_msg("Некорректный ввод, повторите: ")
         else:
-            for i in TypeOfPackaging:
-                if int(type_packing) == i.value:
-                    type_packing_res = i.name
             break
 
     price = get_data("Введите цену за единицу (кг): ")
     while not is_correct_number(price):
         sent_msg("Некорректный ввод, повторите: ")
         price = get_data()
-    return Ingredient(name, category_res, type_packing_res, price)
+    return new_ingredient(name, category, type_packing, price)
