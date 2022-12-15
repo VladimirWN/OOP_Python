@@ -1,6 +1,6 @@
-from data import Node as n
-from service import Operator as op
-from view import View as v
+from Calculator.data import Node as n
+from Calculator.service import Operator as op
+from Calculator.view import View as v
 
 
 def start():
